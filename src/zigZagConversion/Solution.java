@@ -51,6 +51,7 @@ public class Solution {
 		System.out.println(convert2("PAYPALISHIRING", 4));
 	}
     public static String convert(String s, int numRows) {
+//    	这种方法未成功，而且思路复杂
         StringBuilder temp,inputAfter,result;
         String strTemp,strInputAfter;
         inputAfter = new StringBuilder();
