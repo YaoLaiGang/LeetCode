@@ -1,6 +1,5 @@
 package mergeTwoSortedLists;
 
-import org.w3c.dom.ls.LSException;
 
 public class Solution {
 /**
