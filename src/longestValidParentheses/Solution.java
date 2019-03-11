@@ -2,8 +2,6 @@ package longestValidParentheses;
 
 import java.util.Stack;
 
-
-
 public class Solution {
 	public static int longestValidParentheses(String s) {
 /**
@@ -26,9 +24,38 @@ public class Solution {
 		}
 		return maxLength;
     }
+	public static int longestValidParentheses2(String s) {
+/**
+ * 动态规划解法，longest[i]， 表示s[i]能匹配的最大长度
+ * 若s[i]==( => longest[i] = 0
+ * 若s[i]==)
+  	1.s[i sub longest[i sub 1] sub 1] == '('      ((()))型
+  	2.()() 型 加上 longest[i sub longest[i sub 1] sub 2]
+  故转移方程： longest[i] = longest[i sub-1] + 2 + longest[i sub-longest[i sub-1] sub-2]
+  这里要保证i sub longest[i sub 1] sub 1>=0
+  而i sub longest[i sub 1] sub 2 是否为0 只需要判断一下即可
+ * */		
+		int max = 0, tmp;
+		char[] str = s.toCharArray();
+		int longest[] = new int[str.length];
+		longest[0] = 0;
+		for(int i=1;i<longest.length;++i){
+			if(str[i]=='(') longest[i]=0;
+			else {
+				tmp = i - longest[i-1] -1;
+				if(tmp>=0&&str[tmp]=='('){
+					longest[i] = longest[i-1]+2+(tmp-1>=0?longest[tmp-1]:0);
+				}else {
+					longest[i] = 0;
+				}
+			}
+			max = max>longest[i]?max:longest[i];
+		}
+		return max;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(longestValidParentheses(")()())"));
+		System.out.println(longestValidParentheses2(")()())"));
 	}
 
 }
