@@ -34,7 +34,8 @@ public class Solution {
   故转移方程： longest[i] = longest[i sub-1] + 2 + longest[i sub-longest[i sub-1] sub-2]
   这里要保证i sub longest[i sub 1] sub 1>=0
   而i sub longest[i sub 1] sub 2 是否为0 只需要判断一下即可
- * */		
+ * */	
+		if(s.equals("")) return 0;	
 		int max = 0, tmp;
 		char[] str = s.toCharArray();
 		int longest[] = new int[str.length];
