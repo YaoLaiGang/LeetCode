@@ -1,14 +1,9 @@
 package The3Sum;
 
-import java.security.spec.ECFieldF2m;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class Solution {
 /**
@@ -21,7 +16,7 @@ public class Solution {
 		 * 然后从数组两侧取出数字分别为nums[begin]和nums[end]，
 		 * 然后三个数求和值为sum == 0，将三个数加入结果之中，同时将两侧的下标向中间移动，
 		 * 直到不与之前取出的数字相同，避免出现重复的三元组
-		 * sum > 0，因为数组有序，说明右侧的数字过大，所以下标左移，故而执行end--
+		 * sum > 0，因为数组有序，说明右侧的数字过大，所以下标左移，故而执行end----
 		 * sum < 0，因为数组有序，说明左侧的数字过小，所以下标右移，所以执行begin++
 		 * 因为两层的遍历时间复杂度为O(n^2)，O(n*logn) + O(n^2) = O(n^2)，
 		 * 所以总体时间复杂度为O(n^2)
