@@ -89,9 +89,44 @@ public class Solution {
     	
         return sb.toString();
     }
+    public static String longestPalindrome2(String s){
+/*使用DP来解这个问题
+ * 设DP[i][j]表示从i-j能否组成回文串
+ * 如果DP[i][j] == 1 那么DP[i+1][j-1]一定为1
+ * 因此DP[i][j]=
+ * ① 若s[i]==s[j] =>DP[i+1][j-1]
+ * ② 否则为0
+ * 计算顺序：从下到上，从左到右（j>=i）
+ * */    
+    	int len = s.length(), max = 1, maxi=0;
+    	if(len==0) return "";
+    	if(len==1) return s;
+    	int[][] dp = new int[len][len];
+    	for(int i=0; i<len; ++i){
+    		for(int j=0; j<len; ++j){
+    			dp[i][j] = 1;
+    		}
+    	}
+    	for(int i=len-1; i>=0; --i){
+    		for(int j=i+1;j<len;j++){
+    			if(s.charAt(i)==s.charAt(j)){
+    				dp[i][j] = dp[i+1][j-1];
+    				if(dp[i][j]==1&&max<j-i+1){
+    					max = j-i+1;
+    					maxi = i;
+    				}
+    			}else{
+    				dp[i][j]=0;
+    			}
+    		}
+    	}
+    	return s.substring(maxi, maxi+max);
+    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(longestPalindrome("cbbd"));
+//		System.out.println(longestPalindrome("cbbd"));
+		Solution solution = new Solution();
+		System.out.println(solution.longestPalindrome2("babadada"));
 	}
 
 }
