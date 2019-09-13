@@ -24,18 +24,21 @@ public class Solution {
 			res.add(tmp);
 			return;
 		}
-		// 遍历并访问下一层
-		for (int i = index; i <= n; i++) {
+		// 遍历并访问下一层， 这里可以改进一下i的上限，因为长度固定的情况下，剩余元素不足就不用遍历了
+		// 当前长度tmpRes.size()==depth, 剩余元素 n-i, 最少剩余元素 k-(tmpRes.size())
+		// n-i >= k - tmpRes.size()   ====> i <=n-k+tmpRes.size()
+		for (int i = index; i <= n-k+depth; i++) {
+			
 			tmpRes.add(i);
 			dfs(i+1, depth+1, tmpRes);
-			tmpRes.remove((Integer)i);
+			tmpRes.remove(tmpRes.size()-1);
 		}
 		
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Solution solution = new Solution();
-		List<List<Integer>>res = solution.combine(4, 5);
+		List<List<Integer>>res = solution.combine(4, 2);
 		for (List<Integer> list : res) {
 			System.out.println(list);
 		}
