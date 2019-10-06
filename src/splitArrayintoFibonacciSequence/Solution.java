@@ -21,7 +21,7 @@ public class Solution {
         fib = new ArrayList<>();
         res = new ArrayList<>();
         dfs(0, 1);
-        return fib;
+        return res;
     }
     public void dfs(int start, int depth){
         if (start==len){
@@ -39,10 +39,11 @@ public class Solution {
             }
             else{
                 for (int i = start; i < len-1 && i-start+1<=10; i++) {// 1最少留两个，2最少留一个, 注意最大值需要判定
-                    if (i-start+1==10){//判定是否超出整数的最大值
-                        int valid = Integer.parseInt(s.substring(start, i));//缺最后一位
-                        if (valid>214748364) continue;
-                        else if (s.charAt(i)>'7') continue;
+                    if (i-start+1==10&&isOverflow(s.substring(start, i+1))){//判定是否超出整数的最大值
+//                        int valid = Integer.parseInt(s.substring(start, i));//缺最后一位
+//                        if (valid>214748364) continue;
+//                        else if (s.charAt(i)>'7') continue;
+                        continue;
                     }
                     if (memory[start][i]==null){
                         memory[start][i] = Integer.parseInt(s.substring(start, i+1));
@@ -54,7 +55,7 @@ public class Solution {
             }
         }
         else if (depth>2){//要找到前面两个值相加的结果
-            int added = fib.get(depth-2)+fib.get(depth-3);
+            Integer added = fib.get(depth-2)+fib.get(depth-3);
             // 判定是否产生了相加溢出
             if (added<0) return;
             if (s.charAt(start)=='0'){
@@ -68,10 +69,11 @@ public class Solution {
                 int numlen = added==0? 1:(int) Math.log10(added)+1;
                 if (start+numlen-1>=len) return; // 剩余元素长度无法满足
                 if (numlen>10) return;
-                if (numlen==10){//判定是否超出整数的最大值
-                    int valid = Integer.parseInt(s.substring(start, start+numlen-1));//缺最后一位
-                    if (valid>214748364) return;
-                    else if (s.charAt(start+numlen-1)>'7') return;
+                if (numlen==10&&isOverflow(s.substring(start, start+numlen))){//判定是否超出整数的最大值
+//                    int valid = Integer.parseInt(s.substring(start, start+numlen-1));//缺最后一位
+//                    if (valid>214748364) return;
+//                    else if (s.charAt(start+numlen-1)>'7') return;
+                    return;
                 }
                 if (memory[start][start+numlen-1] == null) memory[start][start+numlen-1] = Integer.parseInt(s.substring(start, start+numlen));
                 if (memory[start][start + numlen - 1].equals(added)) {
@@ -82,11 +84,16 @@ public class Solution {
             }
         }
     }
-
+    public boolean isOverflow(String s){
+        // 判定这个字符串是否溢出
+        String p = "2147483647";
+        return s.compareTo(p)>0;
+    }
     public static void main(String[] args) {
         Solution solution = new Solution();
-        solution.splitIntoFibonacci("74912134825162255812723932620170946950766784234934");
+        solution.splitIntoFibonacci("417420815174208193484163452262453871040871393665402264706273658371675923077949581449611550452755");
 //        System.out.println(Integer.MAX_VALUE+"");
+//        System.out.println(solution.isOverflow("2147483648"));
 
     }
 }
