@@ -1,6 +1,5 @@
 package pathSumII;
 
-import convertSortedListtoBinarySearchTree.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;
