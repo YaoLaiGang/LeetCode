@@ -1,4 +1,4 @@
-package RomanToInteger;
+package romanToInteger;
 
 public class Solution {
 /**

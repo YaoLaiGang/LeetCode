@@ -1,4 +1,4 @@
-package StringtoInteger;
+package stringtoInteger;
 
 import java.util.ArrayList;
 

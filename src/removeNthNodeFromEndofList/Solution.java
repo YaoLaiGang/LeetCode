@@ -1,4 +1,4 @@
-package RemoveNthNodeFromEndofList;
+package removeNthNodeFromEndofList;
 
 public class Solution {
 //	删除链表倒数第n个元素，用两个指针遍历即可（差N）
